@@ -47,6 +47,14 @@ const chartData = {
   },
 };
 
+const scaleX = {
+  zooming: true,
+  zoomToValues: [30, 100],
+  guide: {
+    visible: true,
+  },
+};
+
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export default {
@@ -76,11 +84,8 @@ export default {
       return {
         ...chartData,
         scaleX: {
+          ...scaleX,
           labels,
-          zooming: true,
-          guide: {
-            visible: true,
-          },
         },
       };
     },
