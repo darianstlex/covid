@@ -17,9 +17,9 @@ export const cases = {
       let temp = null;
       const list = data
         .map(item => ({ ...item, Date: item.Date.split('T')[0] }))
-        .reduce((acc, { Country, CountryCode, CV, Cases, Status, Date }) => {
+        .reduce((acc, { Country, CountryCode, Cases, Status, Date }) => {
           if ((temp || {}).Date !== Date) {
-            temp = { Country, CountryCode, CV, Cases, Status, Date };
+            temp = { Country, CountryCode, Cases, Status, Date };
             return [...acc, temp];
           } else {
             temp.Cases = temp.Cases + Cases;

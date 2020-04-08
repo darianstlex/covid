@@ -23,6 +23,11 @@ const chartData = {
     tooltip: {
       text: '%t: %kt - %vt',
     },
+    animation: {
+      delay: 10,
+      effect: '5',
+      speed: '500',
+    },
   },
   legend: {
     x: '60px',
