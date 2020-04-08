@@ -9,6 +9,19 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      title: 'Covid 2019',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'Covid 2019 statistic.',
+        },
+        {
+          property: 'og:description',
+          content: 'Covid 2019 statistic.',
+        },
+      ],
+    },
   },
 ];
 

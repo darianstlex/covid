@@ -1,12 +1,13 @@
 <template>
-  <div class="home">
-    <Layout>
-      <Header>Header</Header>
-      <Content>
-        <CountriesGraph />
-      </Content>
-    </Layout>
-  </div>
+  <Layout class="home">
+    <Header>
+      <span class="title">Covid 2019</span>
+    </Header>
+    <Content>
+      <CountriesGraph />
+    </Content>
+    <Footer>@DarianstLex © 2020</Footer>
+  </Layout>
 </template>
 
 <script>
@@ -19,3 +20,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+  height: 100%;
+}
+
+.title {
+  font-size: 28px;
+  color: white;
+}
+</style>
