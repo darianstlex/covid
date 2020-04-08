@@ -1,11 +1,9 @@
 <template>
   <Card class="container">
-    <div class="content">
-      <Select v-model="country" multiple filterable :max-tag-count="10" placeholder="Select Countries">
-        <Option v-for="item in $state.countries.$.list" :value="item.Slug" :key="item.ISO2">{{ item.Country }}</Option>
-      </Select>
-      <zingchart :data="chartData" :series="chartValues" />
-    </div>
+    <Select v-model="country" multiple filterable :max-tag-count="10" placeholder="Select Countries">
+      <Option v-for="item in $state.countries.$.list" :value="item.Slug" :key="item.ISO2">{{ item.Country }}</Option>
+    </Select>
+    <zingchart :data="chartData" :series="chartValues" />
   </Card>
 </template>
 
@@ -107,8 +105,8 @@ export default {
 .container {
   margin: 10px 50px;
 
-  .content {
-    min-height: 200px;
+  @media only screen and (max-width: 960px) {
+    margin: 10px 2px;
   }
 }
 </style>

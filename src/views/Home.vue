@@ -10,7 +10,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import CountriesGraph from '@/components/CountriesGraph.vue';
 
 export default {
