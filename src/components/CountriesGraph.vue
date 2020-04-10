@@ -52,6 +52,7 @@ const chartData = {
     active: true,
     'preserve-zoom': false,
   },
+  series: [{}],
 };
 
 const scaleX = {
