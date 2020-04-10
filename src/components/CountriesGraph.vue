@@ -15,55 +15,7 @@
 </template>
 
 <script>
-const chartData = {
-  theme: 'light',
-  type: 'line',
-  plot: {
-    aspect: 'spline',
-    tooltip: {
-      text: '%t: %kt - %vt',
-    },
-    animation: {
-      delay: 10,
-      effect: '5',
-      speed: '500',
-    },
-  },
-  legend: {
-    x: '60px',
-    y: '70px',
-  },
-  preview: {
-    'background-color': '#d7d7d8',
-    'border-width': 1,
-    height: 50,
-    'preserve-zoom': false,
-    mask: {
-      backgroundColor: 'white',
-      alpha: 0.8,
-    },
-    handle: {
-      'border-width': 2,
-      height: '50px',
-    },
-    y: '85%',
-  },
-  zoom: {
-    active: true,
-    'preserve-zoom': false,
-  },
-  series: [{}],
-};
-
-const scaleX = {
-  zooming: true,
-  zoomToValues: [30, 100],
-  guide: {
-    visible: true,
-  },
-};
-
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+import { chartData, scaleX, months } from './constants';
 
 export default {
   name: 'CountriesGraph',
@@ -133,7 +85,7 @@ export default {
     }
   }
   .status {
-    width: 412px;
+    display: flex;
     margin: 0 0 0 10px;
 
     @media only screen and (max-width: 960px) {
