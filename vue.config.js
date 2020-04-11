@@ -3,7 +3,7 @@ module.exports = {
   publicPath: '/covid/',
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].title = 'Covid 2019';
+      args[0].title = 'Covid 19';
       return args;
     });
   },

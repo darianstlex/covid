@@ -1,7 +1,7 @@
 <template>
   <Layout class="home">
     <Header>
-      <span class="title">Covid 2019</span>
+      <span class="title">Covid - 19</span>
     </Header>
     <Content>
       <CountriesGraph />

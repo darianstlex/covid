@@ -11,11 +11,6 @@ export const countries = {
   },
   async fetch() {
     const { data } = await xhr.get('countries');
-    data.sort((a, b) => {
-      if (a.Country < b.Country) return -1;
-      if (a.Country > b.Country) return 1;
-      return 0;
-    });
-    state.list = data;
+    state.list = data.sort((a, b) => a.Country.localeCompare(b.Country));
   },
 };

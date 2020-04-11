@@ -1,10 +1,10 @@
 <template>
   <Card class="container">
     <div class="controls">
-      <Select v-model="selected" multiple filterable :max-tag-count="10" placeholder="Select Countries">
-        <Option v-for="item in $state.countries.$.list" :value="item.Slug" :key="item.ISO2">{{ item.Country }}</Option>
+      <Select v-model="selected" multiple filterable :max-tag-count="10" size="large" placeholder="Select Countries">
+        <Option v-for="item in countries" :value="item.Slug" :key="item.ISO2">{{ item.Country }}</Option>
       </Select>
-      <RadioGroup class="status" v-model="status" type="button">
+      <RadioGroup class="status" v-model="status" type="button" size="large">
         <Radio label="confirmed">Confirmed</Radio>
         <Radio label="recovered">Recovered</Radio>
         <Radio label="deaths">Deaths</Radio>
@@ -27,13 +27,16 @@ export default {
     };
   },
   computed: {
+    countries() {
+      return this.$state.countries.$.list;
+    },
     cases() {
       return this.$state.cases.$[this.status];
     },
     chartValues() {
       return this.selected.map(country => ({
         values: this.cases[country]?.map(it => it.Cases),
-        text: this.$state.countries.$.list.find(it => it.Slug === country)?.Country,
+        text: this.countries.find(it => it.Slug === country)?.Country,
       }));
     },
     chartData() {
