@@ -10,7 +10,10 @@
         <Radio label="deaths">Deaths</Radio>
       </RadioGroup>
     </div>
-    <zingchart :data="chartData" :series="chartValues" />
+    <div class="chart">
+      <zingchart :data="chartData" :series="chartValues" />
+      <Spin size="large" fix v-if="$state.ui.$.loading"></Spin>
+    </div>
   </Card>
 </template>
 
@@ -55,19 +58,15 @@ export default {
     },
   },
   watch: {
-    async selected(list) {
-      this.$Loading.start();
-      await Promise.all(list.map(it => this.$state.cases.fetch(it, this.status)));
-      this.$Loading.finish();
+    selected(list) {
+      list.map(it => this.$state.cases.fetch(it, this.status));
     },
-    async status(status) {
-      this.$Loading.start();
-      await Promise.all(this.selected.map(it => this.$state.cases.fetch(it, status)));
-      this.$Loading.finish();
+    status(status) {
+      this.selected.map(it => this.$state.cases.fetch(it, status));
     },
   },
-  async mounted() {
-    await this.$state.countries.fetch();
+  mounted() {
+    this.$state.countries.fetch();
   },
 };
 </script>
@@ -96,5 +95,14 @@ export default {
       margin: 10px 0 0 0;
     }
   }
+  .chart {
+    position: relative;
+  }
+}
+</style>
+
+<style lang="scss">
+.ivu-spin-fix {
+  background-color: hsla(0, 0%, 100%, 0.66) !important;
 }
 </style>
