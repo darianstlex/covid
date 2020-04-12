@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 const state = Vue.observable({
   loading: 0,
+  error: null,
 });
 
 export const ui = {
@@ -14,4 +15,10 @@ export const ui = {
   removeLoading() {
     state.loading = state.loading - 1;
   },
+  setError(error) {
+    state.error = error;
+  },
+  resetError() {
+    state.error = null;
+  }
 };

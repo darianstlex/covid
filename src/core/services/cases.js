@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import { xhr } from '@/core/api';
-import { ui } from './ui';
 
 const state = Vue.observable({
   confirmed: {},
@@ -13,12 +12,13 @@ export const cases = {
     return state;
   },
   async fetch(country, status) {
-    ui.addLoading();
-    const { data } = await xhr.get(`total/country/${country}/status/${status}`);
+    const data = await xhr({
+      method: 'get',
+      url: `total/country/${country}/status/${status}`,
+    });
     state[status] = {
       ...state[status],
       [country]: data.map(item => ({ ...item, Date: item.Date.split('T')[0] })),
     };
-    ui.removeLoading();
   },
 };

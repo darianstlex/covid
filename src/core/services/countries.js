@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import { xhr } from '@/core/api';
-import { ui } from './ui';
 
 const state = Vue.observable({
   list: [],
@@ -11,9 +10,10 @@ export const countries = {
     return state;
   },
   async fetch() {
-    ui.addLoading();
-    const { data } = await xhr.get('countries');
+    const data = await xhr({
+      method: 'get',
+      url: 'countries',
+    });
     state.list = data.sort((a, b) => a.Country.localeCompare(b.Country));
-    ui.removeLoading();
   },
 };

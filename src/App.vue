@@ -8,10 +8,13 @@
 export default {
   name: 'app',
   components: {},
-  mounted() {
-    this.$Loading.config({
-      height: 5,
-    });
+  watch: {
+    '$state.ui.$.error'({ data, status }) {
+      this.$Notice.error({
+        title: `Error: ${status}`,
+        desc: data.message,
+      });
+    },
   },
 };
 </script>
