@@ -20,5 +20,5 @@ export const ui = {
   },
   resetError() {
     state.error = null;
-  }
+  },
 };

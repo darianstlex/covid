@@ -1,12 +1,12 @@
 <template>
   <Layout class="home">
     <Header>
-      <span class="title">Covid - 19</span>
+      <span class="title">Covid 19</span>
     </Header>
     <Content>
       <CountriesGraph />
     </Content>
-    <Footer>@DarianstLex © 2020</Footer>
+    <Footer class="footer">@DarianstLex © 2020</Footer>
   </Layout>
 </template>
 
@@ -29,5 +29,11 @@ export default {
 .title {
   font-size: 28px;
   color: white;
+}
+
+.footer {
+  color: white;
+  background: #808695;
+  text-align: center;
 }
 </style>

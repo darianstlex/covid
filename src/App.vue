@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <router-view />
   </div>
 </template>
@@ -7,7 +7,6 @@
 <script>
 export default {
   name: 'app',
-  components: {},
   watch: {
     '$state.ui.$.error'({ data, status }) {
       this.$Notice.error({
@@ -28,7 +27,7 @@ body {
 </style>
 
 <style lang="scss" scoped>
-.app {
+#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
