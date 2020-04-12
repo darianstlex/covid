@@ -19,7 +19,7 @@ export const cases = {
       });
       state[status] = {
         ...state[status],
-        [country]: data,
+        [country]: data.map(item => ({ ...item, Date: item.Date.split('T')[0] })),
       };
     }
   },
