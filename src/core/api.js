@@ -18,7 +18,7 @@ export const xhr = async config => {
 
   try {
     const { data } = await _axios(config);
-    return data || {};
+    return data;
   } catch ({ response = defErrorResponse }) {
     ui.setError(response);
   } finally {

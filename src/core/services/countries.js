@@ -14,6 +14,6 @@ export const countries = {
       method: 'get',
       url: 'countries',
     });
-    state.list = data.sort((a, b) => a.Country.localeCompare(b.Country));
+    if (data) state.list = data.sort((a, b) => a.Country.localeCompare(b.Country));
   },
 };

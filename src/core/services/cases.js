@@ -17,10 +17,12 @@ export const cases = {
         method: 'get',
         url: `total/country/${country}/status/${status}`,
       });
-      state[status] = {
-        ...state[status],
-        [country]: data.map(item => ({ ...item, Date: item.Date.split('T')[0] })),
-      };
+      if (data) {
+        state[status] = {
+          ...state[status],
+          [country]: data.map(item => ({ ...item, Date: item.Date.split('T')[0] })),
+        };
+      }
     }
   },
 };
