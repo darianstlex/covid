@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { useDebounceFn } from '@vueuse/core'
+import { useDebounceFn } from '@vueuse/core';
 import { computed, reactive, watch, onMounted } from '@vue/composition-api';
 import { chartConfig, scaleX, months } from './constants';
 import { countries } from 'services/countries';
