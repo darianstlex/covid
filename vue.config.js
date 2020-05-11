@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   outputDir: '.tmp',
   publicPath: '/covid/',
@@ -6,6 +8,7 @@ module.exports = {
       args[0].title = 'Covid 19';
       return args;
     });
+    config.resolve.alias.set('services', path.resolve(__dirname, 'src/core/services'));
   },
-  productionSourceMap: false,
+  productionSourceMap: true,
 };

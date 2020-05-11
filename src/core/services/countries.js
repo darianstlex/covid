@@ -1,7 +1,7 @@
-import Vue from 'vue';
+import { reactive } from '@vue/composition-api';
 import { xhr } from '@/core/api';
 
-const state = Vue.observable({
+const state = reactive({
   list: [],
 });
 

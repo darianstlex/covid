@@ -1,6 +1,7 @@
 import Vue from 'vue';
+import { reactive, watch } from '@vue/composition-api';
 
-const state = Vue.observable({
+const state = reactive({
   loading: 0,
   error: null,
 });
@@ -19,6 +20,18 @@ export const ui = {
     state.error = error;
   },
   resetError() {
-    state.error = null;
+    if (state.error !== null) state.error = null;
   },
 };
+
+watch(
+  () => state.error,
+  error => {
+    if (error) {
+      Vue.prototype.$Notice.error({
+        title: `Error: ${error.status}`,
+        desc: error.data?.message,
+      });
+    }
+  }
+);

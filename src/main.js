@@ -1,9 +1,10 @@
 import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
 import './plugins/iview';
 import './plugins/zingchart';
+import './plugins/compositionApi';
 import './core/state';
+import App from './App.vue';
+import router from './router';
 
 Vue.config.productionTip = false;
 

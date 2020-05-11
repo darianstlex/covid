@@ -1,72 +1,89 @@
 <template>
   <Card class="container">
     <div class="controls">
-      <Select v-model="selected" multiple filterable :max-tag-count="10" size="large" placeholder="Select Countries">
-        <Option v-for="item in countries" :value="item.Slug" :key="item.ISO2">{{ item.Country }}</Option>
+      <Select
+        v-model="state.selectedCountries"
+        :max-tag-count="10"
+        size="large"
+        placeholder="Select Countries"
+        multiple
+        filterable
+      >
+        <Option v-for="item in countries.$.list" :value="item.Slug" :key="item.ISO2">{{ item.Country }}</Option>
       </Select>
-      <RadioGroup class="status" v-model="status" type="button" size="large">
+      <RadioGroup class="status" v-model="state.status" type="button" size="large">
         <Radio label="confirmed">Confirmed</Radio>
         <Radio label="recovered">Recovered</Radio>
         <Radio label="deaths">Deaths</Radio>
       </RadioGroup>
     </div>
     <div class="chart">
-      <zingchart :data="chartData" :series="chartValues" />
-      <Spin size="large" fix v-if="$state.ui.$.loading"></Spin>
+      <zingchart :data="chartData" :series="chartSeries" />
+      <Spin v-if="$state.ui.$.loading" size="large" fix />
     </div>
   </Card>
 </template>
 
 <script>
-import { chartData, scaleX, months } from './constants';
+import { useDebounceFn } from '@vueuse/core'
+import { computed, reactive, watch, onMounted } from '@vue/composition-api';
+import { chartConfig, scaleX, months } from './constants';
+import { countries } from 'services/countries';
+import { cases } from 'services/cases';
 
 export default {
   name: 'CountriesGraph',
-  components: {},
-  data() {
-    return {
-      selected: ['united-kingdom', 'germany', 'italy', 'spain'],
+  setup() {
+    // state
+    const state = reactive({
+      selectedCountries: ['united-kingdom', 'germany', 'italy', 'spain'],
       status: 'deaths',
-    };
-  },
-  computed: {
-    countries() {
-      return this.$state.countries.$.list;
-    },
-    cases() {
-      return this.$state.cases.$[this.status];
-    },
-    chartValues() {
-      return this.selected.map(country => ({
-        values: this.cases[country]?.map(it => it.Cases),
-        text: this.countries.find(it => it.Slug === country)?.Country,
-      }));
-    },
-    chartData() {
-      const [first = []] = Object.values(this.cases);
+    });
+
+    const fetchCases = useDebounceFn((countryList, status) => {
+      countryList.map(country => cases.fetch(country, status));
+    }, 300);
+
+    // watchers
+    watch([() => state.selectedCountries, () => state.status], ([countryList, status]) => {
+      fetchCases(countryList, status);
+    });
+
+    // computed
+    const chartData = computed(() => {
+      const [first = []] = Object.values(cases.$[state.status]);
       const labels = first.map(it => {
         const [, month, date] = it.Date.split('-');
         return `${date} ${months[month - 1]}`;
       });
+
       return {
-        ...chartData,
+        ...chartConfig,
         scaleX: {
           ...scaleX,
+          zoomToValues: [45, first.length],
           labels,
         },
       };
-    },
-  },
-  watch: {
-    selected(list) {
-      list.map(it => this.$state.cases.fetch(it, this.status));
-    },
-    status(status) {
-      this.selected.map(it => this.$state.cases.fetch(it, status));
-    },
-  },
-  mounted() {
-    this.$state.countries.fetch();
+    });
+
+    const chartSeries = computed(() =>
+      [...state.selectedCountries].map(country => ({
+        values: cases.$[state.status][country]?.map(it => it.Cases),
+        text: countries.$.list.find(it => it.Slug === country)?.Country,
+      }))
+    );
+
+    onMounted(() => {
+      countries.fetch();
+    });
+
+    return {
+      countries,
+      state,
+      chartData,
+      chartSeries,
+    };
   },
 };
 </script>

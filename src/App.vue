@@ -4,20 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'app',
-  watch: {
-    '$state.ui.$.error'({ data, status }) {
-      this.$Notice.error({
-        title: `Error: ${status}`,
-        desc: data.message,
-      });
-    },
-  },
-};
-</script>
-
 <style lang="scss">
 html,
 body {

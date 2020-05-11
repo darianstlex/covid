@@ -1,4 +1,4 @@
-export const chartData = {
+export const chartConfig = {
   theme: 'light',
   type: 'line',
   plot: {
@@ -31,11 +31,18 @@ export const chartData = {
     'preserve-zoom': false,
   },
   series: [{}],
+  scaleY2: {
+    values: '0:100:10',
+    format: '%v%',
+    guide: {
+      visible: false,
+    },
+    zooming: true,
+  },
 };
 
 export const scaleX = {
   zooming: true,
-  zoomToValues: [30, 100],
   guide: {
     visible: true,
   },
