@@ -20,6 +20,7 @@ jobs:
         with:
           run_id: ${{ github.event.workflow_run.id }}
           name: pr_number
+          path: pr
 
       - name: Log
         run: |
