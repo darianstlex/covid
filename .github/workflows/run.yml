@@ -1,0 +1,13 @@
+name: Run
+
+on:
+  workflow_run:
+    workflows: [Close]
+    types: [completed]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        run: echo "${{ github }}"

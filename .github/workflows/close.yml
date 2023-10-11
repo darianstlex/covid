@@ -1,0 +1,16 @@
+name: Close
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+jobs:
+  close:
+    name: Close
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Closing
+        run: echo "${{ github }}"
