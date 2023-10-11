@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run
-        run: echo "${{ github }}"
+        run: echo "${{ fromJson(github) }}"
