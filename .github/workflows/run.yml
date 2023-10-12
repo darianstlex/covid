@@ -24,5 +24,4 @@ jobs:
 
       - name: Log
         run: |
-          ls
           cat pr/pr_number
